@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sevgi Günlüğümüz 💌</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet" />
+
+    <style>
+        /* Genel Tasarım */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            color: #4a2c2a;
+            margin: 0;
+            padding: 20px 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        h1, h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 40px;
+            color: #b03060;
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #a02040;
+        }
+        /* Mektup Kartları */
+        .letter {
+            background-color: rgba(255, 255, 255, 0.85);
+            margin: 15px auto;
+            padding: 15px 25px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(176, 48, 96, 0.3);
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.5;
+            user-select: none;
+        }
+
+        /* Geri Sayım */
+        #countdown {
+            margin-bottom: 30px;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #b03060;
+            user-select: none;
+        }
+
+        /* Müzik Bölümü */
+        #music-player {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        #play-music {
+            background-color: pink;
+            border: none;
+            padding: 10px 30px;
+            font-size: 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 4px 6px rgba(255, 105, 180, 0.6);
+            transition: background-color 0.3s ease;
+        }
+        #play-music:hover {
+            background-color: deeppink;
+        }
+
+        /* Yeni Mektup Ekleme */
+        #add-letter {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 182, 193, 0.2);
+            border-radius: 15px;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            user-select: none;
+        }
+        #letter-date {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid pink;
+            font-size: 16px;
+            width: 50%;
+            max-width: 200px;
+        }
+        #letter-text {
+            width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid pink;
+            font-size: 16px;
+            margin-top: 15px;
+            resize: vertical;
+        }
+        #save-letter {
+            background-color: hotpink;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(255, 105, 180, 0.6);
+            transition: background-color 0.3s ease;
+        }
+        #save-letter:hover {
+            background-color: deeppink;
+        }
+
+        /* Kalp animasyonları */
+        #hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: float 5s linear forwards;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💌 Sevgi Günlüğümüz 💌</h1>
+
+    <!-- Geri Sayım Sayacı -->
+    <div id="countdown">
+        <h2>Yıldönümümüze Kalan Süre:</h2>
+        <p id="timer">00 Gün 00:00:00</p>
+    </div>
+
+    <!-- Günlük Mektuplar -->
+    <div id="letters">
+        <h2>📜 Günlük Mektuplar</h2>
+        <!-- Örnek mektuplar -->
+        <div class="letter">
+            <h3>01.08.2025</h3>
+            <p>Bugün seni ne kadar çok sevdiğimi bir kez daha anladım...</p>
+        </div>
+        <div class="letter">
+            <h3>02.08.2025</h3>
+            <p>Sabah uyandığımda aklımdaki ilk şey sen oldun...</p>
+        </div>
+    </div>
+
+    <!-- Yeni Mektup Ekleme -->
+    <div id="add-letter">
+        <h2>🖊 Yeni Mektup Ekle</h2>
+        <input type="date" id="letter-date" />
+        <br /><br />
+        <textarea id="letter-text" placeholder="Mektubunu buraya yaz..." rows="4"></textarea>
+        <br /><br />
+        <button id="save-letter">Mektubu Kaydet</button>
+    </div>
+
+    <!-- Müzik -->
+    <div id="music-player">
+        <button id="play-music">🎵 Müziği Başlat</button>
+        <audio id="bg-music" loop>
+            <source src="https://www.youtube.com/watch?v=v1PciHjcsAk" type="audio/mpeg" />
+            Tarayıcınız müzik çaları desteklemiyor.
+        </audio>
+    </div>
+
+    <!-- Kalp Animasyonları -->
+    <div id="hearts-container"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // Geri Sayım Sayacı
+        var hedefTarih = new Date("May 11, 2026 00:00:00").getTime();
+
+        var countdown = setInterval(function () {
+            var simdi = new Date().getTime();
+            var kalan = hedefTarih - simdi;
+
+            var gun = Math.floor(kalan / (1000 * 60 * 60 * 24));
+            var saat = Math.floor((kalan % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var dakika = Math.floor((kalan % (1000 * 60 * 60)) / (1000 * 60));
+            var saniye = Math.floor((kalan % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML =
+                gun + " Gün " + saat + ":" + (dakika < 10 ? "0" + dakika : dakika) + ":" + (saniye < 10 ? "0" + saniye : saniye);
+
+            if (kalan < 0) {
+                clearInterval(countdown);
+                document.getElementById("timer").innerHTML = "Geldi! 💖";
+            }
+        }, 1000);
+
+        // Kalp Animasyonları
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            heart.style.opacity = Math.random();
+            document.getElementById("hearts-container").appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Arka Plan Müziği Kontrolü
+        document.getElementById("play-music").addEventListener("click", function () {
+            var music = document.getElementById("bg-music");
+            if (music.paused) {
+                music.play();
+                this.textContent = "⏸ Müziği Durdur";
+            } else {
+                music.pause();
+                this.textContent = "🎵 Müziği Başlat";
+            }
+        });
+
+        // Yeni Mektup Ekleme Sistemi
+        document.getElementById("save-letter").addEventListener("click", function () {
+            var date = document.getElementById("letter-date").value;
+            var text = document.getElementById("letter-text").value.trim();
+
+            if (date && text) {
+                var newLetter = document.createElement("div");
+                newLetter.classList.add("letter");
+                newLetter.innerHTML = `<h3>${date}</h3><p>${text}</p>`;
+
+                document.getElementById("letters").appendChild(newLetter);
+
+                // Temizle
+                document.getElementById("letter-date").value = "";
+                document.getElementById("letter-text").value = "";
+            } else {
+                alert("Lütfen tarih ve mektup metnini doldur.");
+            }
+        });
+    </script>
+</body>
+</html>
