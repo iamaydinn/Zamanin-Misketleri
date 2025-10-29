@@ -118,6 +118,108 @@
 </style>
 </head>
 <body>
+    
+    <!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zamanın Misketleri — Dijital Yerleştirme</title>
+<style>
+/* ... (önceki tüm CSS burada aynı şekilde kalacak) ... */
+
+/* Açılış penceresi (modal) */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+.modal-content {
+  background: white;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: fadeIn .6s ease;
+  text-align: center;
+}
+.modal-content h1 {
+  color: #5b21b6;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.modal-content p {
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.modal-content .team {
+  margin-top: 14px;
+  background: #f3e8ff;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #4c1d95;
+}
+.modal-content button {
+  margin-top: 20px;
+  background: #5b21b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+@keyframes fadeIn {
+  from {opacity:0;transform:scale(0.9)}
+  to {opacity:1;transform:scale(1)}
+}
+</style>
+</head>
+<body>
+
+<!-- 🔹 Açılış Bilgilendirme Penceresi -->
+<div class="modal" id="introModal">
+  <div class="modal-content">
+    <h1>ZAMANIN MİSKETLERİ ETKİNLİĞİ</h1>
+    <p><strong>Sosyal Bilgiler Dersinde Yerel Çocuk Oyunları Dersi</strong> kapsamında hazırladığımız bu etkinlikte, biz öğrenciler geçmişten günümüze uzanan tarihi olayları <em>misketlerle zamana yerleştirerek</em> öğreneceğiz.</p>
+    <p>Amacımız; tarihsel olayların sıralamasını eğlenceli bir şekilde kavramak, geçmişle bugün arasında bağ kurmak ve <strong>kronoloji bilincimizi güçlendirmektir.</strong></p>
+    <p>Oyun içinde her takım, rastgele çektiği olay kartlarını doğru çağa yerleştirmeye çalışacak. Her doğru tahmin, bizi “Zamanın Ustaları” unvanına bir adım daha yaklaştıracak!</p>
+    <div class="team">
+      <div>Hazırlayanlar:</div>
+      <div>Muhammet Emin Aydın<br>Ömer Faruk Aras<br>Batuhan Kalaycıoğlu<br>Abdulsamet Doğramacı<br>Mert Ömer Cacim</div>
+    </div>
+    <button id="startGameBtn">Hazırsınız!</button>
+  </div>
+</div>
+
+<!-- 🔸 Buradan itibaren önceki oyun kodunun <div class="app"> kısmı başlar -->
+<div class="app">
+  <!-- ... önceki tüm içerik buraya aynı şekilde gelecek ... -->
+</div>
+
+<script>
+/* 🔸 Modal aç/kapat işlemi */
+window.addEventListener('DOMContentLoaded', ()=>{
+  const modal = document.getElementById('introModal');
+  const btn = document.getElementById('startGameBtn');
+  btn.addEventListener('click', ()=>{
+    modal.style.display = 'none';
+  });
+});
+
+/* 🔸 Buradan itibaren önceki JavaScript kodun (oyun mantığı, puanlama vb.) aynen devam edecek */
+</script>
+
+</body>
+</html>
+
 <div class="app">
   <header>
     <div class="logo">
@@ -477,4 +579,3 @@ function randomColor(){
 </script>
 </body>
 </html>
-
