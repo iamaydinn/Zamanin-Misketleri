@@ -1,300 +1,480 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sevgi Günlüğümüz 💌</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zamanın Misketleri — Dijital Yerleştirme</title>
+<style>
+  :root{
+    --bg:#f6fbff;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#5b21b6;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --panel:#e6eefc;
+    --shadow: 0 6px 18px rgba(11,35,70,0.08);
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:#0b1220}
+  .app{
+    max-width:1150px;
+    margin:18px auto;
+    padding:18px;
+  }
+  header{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .logo{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo .title{
+    font-size:20px;font-weight:800;color:var(--accent);
+  }
+  .controls{
+    margin-left:auto;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .btn{
+    background:var(--accent);
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    font-weight:600;
+  }
+  .btn.secondary{
+    background:transparent;color:var(--accent);border:2px solid var(--accent);
+  }
+  .panel{
+    background:var(--card);
+    padding:12px;border-radius:10px;box-shadow:var(--shadow);
+  }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet" />
+  .top-area{display:flex;gap:12px;margin-bottom:14px}
+  .left{
+    width:260px; min-height:360px; display:flex; flex-direction:column; gap:10px;
+  }
+  .team-select{display:flex;flex-direction:column;gap:8px}
+  .team-list{display:flex;flex-direction:column;gap:8px}
+  .team-item{
+    padding:8px;border-radius:8px;background:linear-gradient(90deg,#eef2ff,#fff);display:flex;align-items:center;justify-content:space-between;font-weight:700;color:#0b1220;
+  }
+  .team-item.active{outline:3px solid rgba(91,33,182,0.12)}
+  .score{font-weight:800;color:var(--accent);font-size:18px}
+  .add-team{display:flex;gap:6px;align-items:center}
+  input[type="text"]{padding:8px;border-radius:8px;border:1px solid #dbeafe;flex:1}
 
-    <style>
-        /* Genel Tasarım */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-            color: #4a2c2a;
-            margin: 0;
-            padding: 20px 0;
-            text-align: center;
-            overflow-x: hidden;
-        }
-        h1, h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 40px;
-            color: #b03060;
-            margin-bottom: 10px;
-        }
-        h3 {
-            color: #a02040;
-        }
-        /* Mektup Kartları */
-        .letter {
-            background-color: rgba(255, 255, 255, 0.85);
-            margin: 15px auto;
-            padding: 15px 25px;
-            border-radius: 15px;
-            width: 80%;
-            max-width: 600px;
-            box-shadow: 0 0 10px rgba(176, 48, 96, 0.3);
-            text-align: left;
-            font-size: 18px;
-            line-height: 1.5;
-            user-select: none;
-        }
+  .middle{
+    flex:1; min-height:360px; display:flex;flex-direction:column;gap:12px;
+  }
+  .eras{display:flex;gap:10px;justify-content:space-between}
+  .era{
+    flex:1;padding:10px;border-radius:10px;background:var(--panel);min-height:120px;display:flex;flex-direction:column;gap:6px;align-items:center;
+    border:2px dashed transparent; transition:all .15s ease;
+  }
+  .era:hover{transform:translateY(-3px)}
+  .era.dragover{border-color:var(--accent);background:linear-gradient(180deg,#eef2ff,#ffffff)}
+  .era .era-name{font-weight:800;color:#073b4c}
+  .era .era-range{font-size:12px;color:var(--muted)}
 
-        /* Geri Sayım */
-        #countdown {
-            margin-bottom: 30px;
-        }
-        #timer {
-            font-size: 24px;
-            font-weight: bold;
-            color: #b03060;
-            user-select: none;
-        }
+  .board{
+    display:flex;gap:10px; margin-top:6px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+  }
 
-        /* Müzik Bölümü */
-        #music-player {
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
-        #play-music {
-            background-color: pink;
-            border: none;
-            padding: 10px 30px;
-            font-size: 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            color: white;
-            box-shadow: 0 4px 6px rgba(255, 105, 180, 0.6);
-            transition: background-color 0.3s ease;
-        }
-        #play-music:hover {
-            background-color: deeppink;
-        }
+  .card{
+    width:200px;padding:10px;border-radius:8px;background:var(--card);box-shadow:var(--shadow);cursor:grab;margin:6px;
+    user-select:none;border-left:6px solid var(--accent);
+  }
+  .card.small{width:150px}
+  .card h4{margin:0 0 6px 0;font-size:14px}
+  .card p{margin:0;font-size:13px;color:var(--muted)}
 
-        /* Yeni Mektup Ekleme */
-        #add-letter {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: rgba(255, 182, 193, 0.2);
-            border-radius: 15px;
-            text-align: center;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            user-select: none;
-        }
-        #letter-date {
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid pink;
-            font-size: 16px;
-            width: 50%;
-            max-width: 200px;
-        }
-        #letter-text {
-            width: 80%;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid pink;
-            font-size: 16px;
-            margin-top: 15px;
-            resize: vertical;
-        }
-        #save-letter {
-            background-color: hotpink;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 15px;
-            box-shadow: 0 4px 6px rgba(255, 105, 180, 0.6);
-            transition: background-color 0.3s ease;
-        }
-        #save-letter:hover {
-            background-color: deeppink;
-        }
+  .right{
+    width:260px; display:flex;flex-direction:column;gap:12px;
+  }
 
-        /* Kalp animasyonları */
-        #hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 9999;
-        }
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            transform: rotate(45deg);
-            animation: float 5s linear forwards;
-        }
-        .heart::before,
-        .heart::after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            border-radius: 50%;
-        }
-        .heart::before {
-            top: -10px;
-            left: 0;
-        }
-        .heart::after {
-            left: -10px;
-            top: 0;
-        }
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(45deg);
-                opacity: 0;
-            }
-        }
-    </style>
+  .log{height:120px;overflow:auto;padding:8px;background:linear-gradient(180deg,#fff,#fbfbff);border-radius:8px;border:1px dashed #edf2ff}
+  .hint{font-size:13px;color:var(--muted)}
+  footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* small screens */
+  @media (max-width:900px){
+    .top-area{flex-direction:column}
+    .left,.right{width:100%}
+    .eras{flex-direction:row;overflow:auto}
+  }
+</style>
 </head>
 <body>
-
-    <h1>💌 Sevgi Günlüğümüz 💌</h1>
-
-    <!-- Geri Sayım Sayacı -->
-    <div id="countdown">
-        <h2>Yıldönümümüze Kalan Süre:</h2>
-        <p id="timer">00 Gün 00:00:00</p>
+<div class="app">
+  <header>
+    <div class="logo">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><rect x="1" y="1" width="22" height="22" rx="6" fill="#eef2ff"/><circle cx="8.5" cy="9.5" r="2.4" fill="#6b21a8"/><rect x="13" y="6" width="8" height="2.8" rx="1" fill="#6b21a8"/></svg>
+      <div>
+        <div class="title">ZAMANIN MİSKETLERİ</div>
+        <div style="font-size:12px;color:var(--muted)">Dijital Yerleştirme • Öğrenci Dostu</div>
+      </div>
     </div>
 
-    <!-- Günlük Mektuplar -->
-    <div id="letters">
-        <h2>📜 Günlük Mektuplar</h2>
-        <!-- Örnek mektuplar -->
-        <div class="letter">
-            <h3>10.08.2025</h3>
-            <p> "Bugün, seninle olduğum için dünyanın en şanslı insanı olduğumu bir kez daha hatırladım. Her gülüşün, her sesin, bana yeniden 'iyi ki' dedirtiyor. Seni çok seviyorum."</p>
+    <div class="controls">
+      <div id="currentTeamLabel" style="font-weight:700;color:#0b1220;margin-right:8px">Takım: —</div>
+      <button class="btn" id="resetBtn">Sıfırla</button>
+      <button class="btn secondary" id="helpBtn">Yardım</button>
+    </div>
+  </header>
+
+  <div class="top-area">
+    <div class="left panel">
+      <div style="font-weight:800;margin-bottom:8px">Takımlar</div>
+      <div class="team-select">
+        <div class="team-list" id="teamList"></div>
+
+        <div style="margin-top:6px" class="add-team">
+          <input id="teamInput" type="text" placeholder="Yeni takım adı (örn. Mavi Takım)" />
+          <button class="btn" id="addTeamBtn">Ekle</button>
         </div>
-        <div class="letter">
-            <h3>11.08.2025</h3>
-            <p>Sevgilim,
-Bir ay daha geçti… Ama bana sorarsan zaman, seninle geçtiğinde akıp gitmiyor; sanki tatlı bir rüyanın içinde hafifçe salınıyor. Seninle yaşadığım her an, kalbime küçük bir mutluluk çiçeği ekiyor. Aylar geçtikçe o çiçekler çoğalıyor, kocaman bir sevgi bahçesine dönüşüyor. 🌸
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">Not: Her takım için puan otomatik tutulur.</div>
+      </div>
+      <hr style="margin:10px 0;border:none;border-top:1px dashed #f0f6ff" />
+      <div style="font-weight:800;margin-bottom:6px">Durum</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:10px;height:10px;background:#ffedd5;border-radius:2px"></div>
+        <div class="hint">Sürükle veya kart seç → ardından yuva seç</div>
+      </div>
 
-Bugün, bizim ay dönümümüz… Aslında “biz” olduğumuz her gün kutlanmaya değer ama bu gün, hayatımızın takviminde özel bir parıltı gibi duruyor. Senin gülüşün, sesin, varlığın… Hepsi bana “iyi ki” dedirtiyor. İyi ki kalbim seni bulmuş, iyi ki yollarımız kesişmiş.
-
-Seninle beraberken dünya daha güzel, hava daha ılık, günler daha huzurlu… Ay dönümümüzde sana tek bir söz veriyorum: Ne olursa olsun, her yeni gün seni daha çok seveceğim. Çünkü sen, hem masalımın kahramanı hem de gerçeğimin en güzel yanı oldun.
-
-Nice aylarımıza, nice yıllarımıza, hep el ele, hep kalp kalbe… 💖✨</p>
-        </div>
-<div class="letter">
-            <h3>Gülçin 🤍 Muhammet</h3>
-            <p>“Bu bizim masalımız sevgilimm.”</p>
-        </div>
     </div>
 
-    <!-- Yeni Mektup Ekleme -->
-    <div id="add-letter">
-        <h2>🖊 Yeni Mektup Ekle</h2>
-        <input type="date" id="letter-date" />
-        <br /><br />
-        <textarea id="letter-text" placeholder="Mektubunu buraya yaz..." rows="4"></textarea>
-        <br /><br />
-        <button id="save-letter">Mektubu Kaydet</button>
+    <div class="middle">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:800">Çağ Yuvaları</div>
+        <div style="color:var(--muted);font-size:13px">Doğru yerleştirme: +10 • Yakın: +5 • Yanlış: 0</div>
+      </div>
+
+      <div class="eras" id="eras">
+        <!-- eras inserted by JS -->
+      </div>
+
+      <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-weight:800">Olay Kartları</div>
+        <div style="font-size:13px;color:var(--muted)">Kartlara tıklayıp bir yuva seçebilirsiniz (dokunmatik uyumlu)</div>
+      </div>
+
+      <div class="board panel" id="board">
+        <!-- cards -->
+      </div>
     </div>
 
-    <!-- Müzik -->
-    <div id="music-player">
-        <button id="play-music">🎵 Müziği Başlat</button>
-        <audio id="bg-music" loop>
-            <source src="sarki.mp3" type="audio/mpeg" />
-            Tarayıcınız müzik çaları desteklemiyor.
-        </audio>
+    <div class="right panel">
+      <div style="font-weight:800">Puan Tablosu</div>
+      <div id="scoreboard" style="display:flex;flex-direction:column;gap:8px"></div>
+
+      <div style="margin-top:6px;font-weight:700">Oyun Günlüğü</div>
+      <div class="log" id="logArea"></div>
+
+      <div style="margin-top:8px">
+        <button class="btn" id="showResults">Sonuçları Göster</button>
+        <button class="btn secondary" id="exportBtn" style="margin-left:6px">Skoru Kopyala</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Kalp Animasyonları -->
-    <div id="hearts-container"></div>
+  <footer class="hint">Öğretmen ipucu: "Tahmin" teması için yuvalarda tarihleri başta göstermeyerek tartışma turu oluşturabilirsiniz.</footer>
+</div>
 
-    <!-- JavaScript -->
-    <script>
-        // Geri Sayım Sayacı
-        var hedefTarih = new Date("May 11, 2026 00:00:00").getTime();
+<script>
+/*
+  Zamanın Misketleri - Dijital Yerleştirme
+  - Takım oluşturma/ seçme
+  - Kartları sürükle-bırak veya tıklama ile yuvalara yerleştirme
+  - Puanlama: doğru/ yakın / yanlış
+  - Basit log ve sonuç gösterimi
+*/
 
-        var countdown = setInterval(function () {
-            var simdi = new Date().getTime();
-            var kalan = hedefTarih - simdi;
+// --- Demo veri: çağlar ve kartlar ---
+// eras: id, name, rangeStart, rangeEnd (inclusive), displayRange (string)
+const ERAS = [
+  {id:'ilk', name:'İlk Çağ', rangeStart:-3200, rangeEnd:375, displayRange:'M.Ö. 3200 – M.S. 375', color:'#fef3c7'},
+  {id:'orta', name:'Orta Çağ', rangeStart:375, rangeEnd:1453, displayRange:'M.S. 375 – 1453', color:'#ede9fe'},
+  {id:'yeni', name:'Yeni Çağ', rangeStart:1453, rangeEnd:1789, displayRange:'1453 – 1789', color:'#dbeafe'},
+  {id:'yakin', name:'Yakın Çağ', rangeStart:1789, rangeEnd:2100, displayRange:'1789 – Günümüz', color:'#dcfce7'}
+];
 
-            var gun = Math.floor(kalan / (1000 * 60 * 60 * 24));
-            var saat = Math.floor((kalan % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var dakika = Math.floor((kalan % (1000 * 60 * 60)) / (1000 * 60));
-            var saniye = Math.floor((kalan % (1000 * 60)) / 1000);
+// cards: id, title, year (or approximate), short
+const CARDS = [
+  {id:'c1', title:'İstanbul’un Fethi', year:1453, short:'Bizans’ın başkenti İstanbul Osmanlı tarafından fethedildi.'},
+  {id:'c2', title:'Sanayi Devrimi (başlangıç)', year:1769, short:'Buhar makinesiyle başlayan sanayi değişimi.'},
+  {id:'c3', title:'Mağara Resimleri (Lascaux)', year:-15000, short:'İnsanların ilk duvar resimleri.'},
+  {id:'c4', title:'Rönesans Dönemi', year:1500, short:'Sanat ve bilimde yeniden doğuş.'},
+  {id:'c5', title:'Malazgirt Savaşı', year:1071, short:'Türklerin Anadolu’ya girişi.'},
+  {id:'c6', title:'Cumhuriyetin İlanı', year:1923, short:'Türkiye Cumhuriyeti kuruldu.'},
+  {id:'c7', title:'Matbaanın Avrupa’ya Girişi', year:1450, short:'Bilginin yayılmasını hızlandırdı.'},
+  {id:'c8', title:'İlk Yazının İcadı', year:-3200, short:'Yazının bulunmasıyla tarihin başlaması.'},
+  {id:'c9', title:'Amerika’nın Keşfi', year:1492, short:'Yeni kıtaların bulunması.'},
+  {id:'c10', title:'Ay’a İlk İnsan Yolculuğu', year:1969, short:'Apollo 11 ile Ay yürüyüşü.'}
+];
 
-            document.getElementById("timer").innerHTML =
-                gun + " Gün " + saat + ":" + (dakika < 10 ? "0" + dakika : dakika) + ":" + (saniye < 10 ? "0" + saniye : saniye);
+// state
+let teams = []; // {id,name,score,color}
+let selectedTeamId = null;
+let placed = {}; // cardId -> eraId
+let logEl, teamListEl, boardEl, erasEl, scoreboardEl;
 
-            if (kalan < 0) {
-                clearInterval(countdown);
-                document.getElementById("timer").innerHTML = "Geldi! 💖";
-            }
-        }, 1000);
+// utilities
+const uid = (p='id') => p + Math.random().toString(36).slice(2,8);
+const fmt = n => n>=0? n : `${Math.abs(n)} M.Ö.`;
 
-        // Kalp Animasyonları
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-            heart.style.opacity = Math.random();
-            document.getElementById("hearts-container").appendChild(heart);
+// init DOM
+document.addEventListener('DOMContentLoaded', ()=> {
+  logEl = document.getElementById('logArea');
+  teamListEl = document.getElementById('teamList');
+  boardEl = document.getElementById('board');
+  erasEl = document.getElementById('eras');
+  scoreboardEl = document.getElementById('scoreboard');
 
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
-        setInterval(createHeart, 300);
+  // build eras
+  for(const e of ERAS){
+    const d = document.createElement('div');
+    d.className = 'era panel';
+    d.id = `era-${e.id}`;
+    d.dataset.era = e.id;
+    d.style.background = `linear-gradient(180deg, ${e.color}, #fff)`;
+    d.innerHTML = `<div class="era-name">${e.name}</div><div class="era-range">${e.displayRange}</div><div style="flex:1"></div><div style="font-size:12px;color:var(--muted)">Bırakmak için buraya sürükleyin</div>`;
+    erasEl.appendChild(d);
+    // drag events
+    d.addEventListener('dragover', ev=> ev.preventDefault());
+    d.addEventListener('dragenter', ()=> d.classList.add('dragover'));
+    d.addEventListener('dragleave', ()=> d.classList.remove('dragover'));
+    d.addEventListener('drop', ev=> {
+      ev.preventDefault();
+      d.classList.remove('dragover');
+      const cardId = ev.dataTransfer.getData('text/plain');
+      if(cardId) tryPlace(cardId, e.id);
+    });
+    // touch/click alternative: click era to place selectedCard
+    d.addEventListener('click', ()=> {
+      if(window._tapSelectedCard) tryPlace(window._tapSelectedCard, e.id);
+    });
+  }
 
-        // Arka Plan Müziği Kontrolü
-        document.getElementById("play-music").addEventListener("click", function () {
-            var music = document.getElementById("bg-music");
-            if (music.paused) {
-                music.play();
-                this.textContent = "⏸ Müziği Durdur";
-            } else {
-                music.pause();
-                this.textContent = "🎵 Müziği Başlat";
-            }
-        });
+  // populate board cards
+  for(const c of CARDS){
+    const el = makeCard(c);
+    boardEl.appendChild(el);
+  }
 
-        // Yeni Mektup Ekleme Sistemi
-        document.getElementById("save-letter").addEventListener("click", function () {
-            var date = document.getElementById("letter-date").value;
-            var text = document.getElementById("letter-text").value.trim();
+  // team sample
+  addTeam('Mavi Takım','#0ea5e9');
+  addTeam('Turuncu Takım','#f97316');
+  addTeam('Yeşil Takım','#10b981');
+  addTeam('Kırmızı Takım','#ef4444');
 
-            if (date && text) {
-                var newLetter = document.createElement("div");
-                newLetter.classList.add("letter");
-                newLetter.innerHTML = `<h3>${date}</h3><p>${text}</p>`;
+  // buttons
+  document.getElementById('addTeamBtn').addEventListener('click', ()=> {
+    const v = document.getElementById('teamInput').value.trim();
+    if(!v) return alert('Takım adı girin');
+    addTeam(v);
+    document.getElementById('teamInput').value='';
+  });
+  document.getElementById('resetBtn').addEventListener('click', resetAll);
+  document.getElementById('helpBtn').addEventListener('click', ()=> {
+    alert('Kılavuz:\n• Takım seçin.\n• Kartı sürükleyip bir çağa bırakın veya kart seçip çağ kartına tıklayın.\n• Doğru yerleştirme +10 puan, yakın +5, yanlış 0.');
+  });
+  document.getElementById('showResults').addEventListener('click', showResults);
+  document.getElementById('exportBtn').addEventListener('click', ()=> {
+    navigator.clipboard.writeText(getScoreText()).then(()=> alert('Skor panosu kopyalandı!'));
+  });
 
-                document.getElementById("letters").appendChild(newLetter);
+  // keyboard accessibility: allow card selection by click
+  boardEl.addEventListener('click', (e)=>{
+    const c = e.target.closest('.card');
+    if(!c) return;
+    // toggle selection
+    document.querySelectorAll('.card').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+    window._tapSelectedCard = c.dataset.card;
+    log(`Kart seçildi: ${c.dataset.cardTitle} — bir yuva seçin`);
+  });
 
-                // Temizle
-                document.getElementById("letter-date").value = "";
-                document.getElementById("letter-text").value = "";
-            } else {
-                alert("Lütfen tarih ve mektup metnini doldur.");
-            }
-        });
-    </script>
+});
+
+// create card element
+function makeCard(c){
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.draggable = true;
+  el.id = `card-${c.id}`;
+  el.dataset.card = c.id;
+  el.dataset.cardTitle = c.title;
+  el.innerHTML = `<h4>${c.title}</h4><p>${c.short}</p>`;
+  // dragstart
+  el.addEventListener('dragstart', ev=>{
+    ev.dataTransfer.setData('text/plain', c.id);
+    // for visual feedback
+    ev.dataTransfer.effectAllowed = 'move';
+  });
+  // click for tap workflows
+  el.addEventListener('click', ()=> {
+    // handled in board click listener (selected)
+  });
+  return el;
+}
+
+// add team
+function addTeam(name, color){
+  const id = uid('team');
+  const team = {id,name,score:0,color: color || randomColor()};
+  teams.push(team);
+  renderTeams();
+  selectTeam(id);
+}
+
+function renderTeams(){
+  teamListEl.innerHTML = '';
+  for(const t of teams){
+    const div = document.createElement('div');
+    div.className = 'team-item' + (t.id===selectedTeamId ? ' active' : '');
+    div.style.borderLeft = `6px solid ${t.color}`;
+    div.innerHTML = `<div>${t.name}</div><div class="score" id="score-${t.id}">${t.score}</div>`;
+    div.addEventListener('click', ()=> selectTeam(t.id));
+    teamListEl.appendChild(div);
+  }
+  renderScoreboard();
+}
+
+function selectTeam(id){
+  selectedTeamId = id;
+  document.getElementById('currentTeamLabel').textContent = 'Takım: ' + (teams.find(x=>x.id===id)?.name || '—');
+  renderTeams();
+}
+
+function renderScoreboard(){
+  scoreboardEl.innerHTML = '';
+  for(const t of teams){
+    const row = document.createElement('div');
+    row.style.display='flex';row.style.justifyContent='space-between';row.style.alignItems='center';
+    row.style.padding='6px';row.style.borderRadius='6px';row.style.background='#fff';
+    row.innerHTML = `<div style="font-weight:700">${t.name}</div><div style="font-weight:900;color:${t.color}">${t.score}</div>`;
+    scoreboardEl.appendChild(row);
+  }
+}
+
+// attempt placement
+function tryPlace(cardId, eraId){
+  if(!selectedTeamId){ alert('Lütfen önce bir takım seçin.'); return; }
+  // check if already placed
+  if(placed[cardId]){
+    log(`(Uyarı) Bu kart zaten yerleştirildi: ${cardId}`);
+    return;
+  }
+  const card = CARDS.find(c=>c.id===cardId);
+  const era = ERAS.find(e=>e.id===eraId);
+  if(!card || !era) return;
+
+  // scoring logic
+  // if card.year within era.rangeStart..era.rangeEnd => correct
+  // if within +/- 50 years of boundaries => near (example)
+  let awarded = 0, reason='';
+  if(card.year >= era.rangeStart && card.year <= era.rangeEnd){
+    awarded = 10; reason='Doğru yerleştirme';
+  } else {
+    // compute distance to closest boundary in years
+    const dist = Math.min(Math.abs(card.year - era.rangeStart), Math.abs(card.year - era.rangeEnd));
+    // define "near" threshold 60 years (for demo)
+    if(dist <= 60) { awarded = 5; reason='Yakın yerleştirme'; }
+    else { awarded = 0; reason='Yanlış yerleştirme'; }
+  }
+
+  // record placement
+  placed[cardId] = eraId;
+  // update team score
+  const team = teams.find(t=>t.id===selectedTeamId);
+  if(!team) return;
+  team.score += awarded;
+  renderTeams();
+
+  // visually move card into era
+  const cardEl = document.getElementById('card-' + cardId);
+  if(cardEl){
+    // shrink and append
+    cardEl.style.opacity = '0.95';
+    cardEl.style.transform = 'translateY(0)';
+    cardEl.style.cursor = 'default';
+    cardEl.draggable = false;
+    // clone small label into era
+    const small = document.createElement('div');
+    small.className = 'card small';
+    small.style.borderLeft = `6px solid ${team.color}`;
+    small.innerHTML = `<strong style="font-size:13px">${card.title}</strong><div style="font-size:11px;color:var(--muted)">${card.year>0 ? card.year : Math.abs(card.year)+' M.Ö.'}</div>`;
+    document.getElementById('era-' + eraId).appendChild(small);
+    cardEl.remove();
+  }
+
+  log(`${team.name} takımı: "${card.title}" → ${era.name} (${reason}) [+${awarded}]`);
+}
+
+// logging
+function log(text){
+  const d = new Date();
+  const t = d.toLocaleTimeString();
+  const line = document.createElement('div');
+  line.textContent = `[${t}] ${text}`;
+  logEl.prepend(line);
+}
+
+// reset
+function resetAll(){
+  if(!confirm('Tüm yerleştirmeleri sıfırlamak istiyor musunuz?')) return;
+  // reset variables
+  placed = {};
+  teams.forEach(t=> t.score = 0);
+  // clear eras content and rebuild base eras
+  document.querySelectorAll('.era').forEach(e=> {
+    const id = e.dataset.era;
+    e.innerHTML = `<div class="era-name">${ERAS.find(x=>x.id===id).name}</div><div class="era-range">${ERAS.find(x=>x.id===id).displayRange}</div><div style="flex:1"></div><div style="font-size:12px;color:var(--muted)">Bırakmak için buraya sürükleyin</div>`;
+  });
+  // rebuild board
+  boardEl.innerHTML = '';
+  for(const c of CARDS){
+    const el = makeCard(c);
+    boardEl.appendChild(el);
+  }
+  renderTeams();
+  log('Oyun sıfırlandı.');
+}
+
+// show results
+function showResults(){
+  let s = '--- Skor Tablosu ---\n';
+  const sorted = [...teams].sort((a,b)=>b.score-a.score);
+  sorted.forEach((t,i)=> s += `${i+1}. ${t.name} — ${t.score} puan\n`);
+  alert(s);
+}
+
+function getScoreText(){
+  const sorted = [...teams].sort((a,b)=>b.score-a.score);
+  let text = 'Zamanin Misketleri - Skor\n';
+  sorted.forEach((t,i)=> text += `${i+1}. ${t.name} — ${t.score} puan\n`);
+  return text;
+}
+
+function randomColor(){
+  const colors = ['#0ea5e9','#f97316','#10b981','#ef4444','#8b5cf6','#06b6d4','#f43f5e'];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+
+</script>
 </body>
 </html>
-
 
