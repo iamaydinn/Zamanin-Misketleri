@@ -7,6 +7,16 @@
 <meta name="description" content="Zamanın Misketleri — Sosyal Bilgiler dersinde oyun temelli kronoloji öğretimi. Atatürk Üniversitesi, 2025.">
 <meta name="author" content="Muhammet Emin Aydın, Ömer Faruk Aras, Batuhan Kalaycıoğlu, Abdulsamet Doğramacı, Mert Ömer Cacim">
 <style>
+
+#teamWheel {
+  border: 6px solid #5b21b6;
+  border-radius: 50%;
+  background: conic-gradient(#f87171 0deg 90deg, #60a5fa 90deg 180deg, #facc15 180deg 270deg, #34d399 270deg 360deg);
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+
 :root{
   --bg:#f6fbff; --card:#ffffff; --muted:#6b7280; --accent:#5b21b6;
   --panel:#e6eefc; --shadow:0 6px 18px rgba(11,35,70,0.08);
@@ -73,6 +83,18 @@ footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
     <button id="startGameBtn">Hazırsınız!</button>
   </div>
 </div>
+
+<!-- 🎡 Takım Sırası Belirleme Çarkı -->
+<div id="wheelModal" class="modal">
+  <div class="modal-content" style="max-width: 620px;">
+    <h1>Takım Sırasını Belirleme</h1>
+    <canvas id="teamWheel" width="300" height="300" style="margin: 20px auto; display:block;"></canvas>
+    <button id="spinBtn">Çarkı Çevir</button>
+    <p id="resultText" style="margin-top:15px;font-weight:700;color:#5b21b6"></p>
+    <div id="orderList" style="margin-top:15px;text-align:left;font-weight:600;color:#1e293b"></div>
+  </div>
+</div>
+
 
 <div class="app" id="gameApp" style="display:none;">
   <header>
@@ -443,6 +465,97 @@ function log(text){
   line.textContent = `[${now.toLocaleTimeString()}] ${text}`;
   logEl.prepend(line);
 }
+
+// 🎡 Takım Sırası Belirleme Çarkı (4 Tur)
+const wheel = document.getElementById("teamWheel");
+const ctx = wheel.getContext("2d");
+const resultText = document.getElementById("resultText");
+const wheelModal = document.getElementById("wheelModal");
+const spinBtn = document.getElementById("spinBtn");
+const orderList = document.getElementById("orderList");
+
+let rotation = 0;
+let spinning = false;
+let drawnTeams = [];
+let round = 1;
+
+function getTeamNames() {
+  return teams.map(t => t.name);
+}
+
+function drawWheel() {
+  const names = getTeamNames().filter(n => !drawnTeams.includes(n));
+  const total = names.length;
+  const arc = (2 * Math.PI) / total;
+  ctx.clearRect(0,0,300,300);
+
+  for (let i = 0; i < total; i++) {
+    const angle = i * arc;
+    ctx.beginPath();
+    ctx.moveTo(150,150);
+    ctx.arc(150,150,150,angle,angle+arc);
+    ctx.fillStyle = ["#f87171","#60a5fa","#facc15","#34d399","#a78bfa","#fb923c"][i%6];
+    ctx.fill();
+    ctx.save();
+    ctx.translate(150,150);
+    ctx.rotate(angle + arc/2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "bold 14px Segoe UI";
+    ctx.fillText(names[i] || "", 130, 5);
+    ctx.restore();
+  }
+}
+
+drawWheel();
+
+spinBtn.addEventListener("click", () => {
+  if (spinning) return;
+  const names = getTeamNames().filter(n => !drawnTeams.includes(n));
+  if (names.length === 0) {
+    resultText.textContent = "🎯 Tüm takımların sırası belirlendi!";
+    setTimeout(()=> wheelModal.style.display="none", 3000);
+    return;
+  }
+
+  spinning = true;
+  const spinTime = 3000;
+  const spinAngle = 360 * 10 + Math.random() * 360;
+  const start = Date.now();
+
+  const animate = () => {
+    const elapsed = Date.now() - start;
+    if (elapsed < spinTime) {
+      rotation = (spinAngle * easeOut(elapsed / spinTime)) % 360;
+      wheel.style.transform = `rotate(${rotation}deg)`;
+      requestAnimationFrame(animate);
+    } else {
+      spinning = false;
+      const total = names.length;
+      const arc = 360 / total;
+      const index = Math.floor(((360 - (rotation % 360)) % 360) / arc);
+      const winner = names[index];
+      drawnTeams.push(winner);
+      resultText.textContent = `🎯 ${round}. sırada oynayacak takım: ${winner}`;
+      orderList.innerHTML += `<div>${round}. ${winner}</div>`;
+      round++;
+      if (drawnTeams.length < getTeamNames().length) {
+        drawWheel(); // çark yeniden çiz
+      } else {
+        resultText.textContent = "🎉 Tüm takımların sırası belirlendi!";
+        setTimeout(()=> wheelModal.style.display="none", 3500);
+      }
+    }
+  };
+  animate();
+});
+
+function easeOut(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+
+
 </script>
 </body>
 </html>
