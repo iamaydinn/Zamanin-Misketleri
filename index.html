@@ -3,199 +3,69 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Zamanın Misketleri — Dijital Yerleştirme</title>
+<title>Zamanın Misketleri — 50 Kartlı Dijital Yerleştirme</title>
+<meta name="description" content="Zamanın Misketleri — Sosyal Bilgiler dersinde oyun temelli kronoloji öğretimi. Atatürk Üniversitesi, 2025.">
+<meta name="author" content="Muhammet Emin Aydın, Ömer Faruk Aras, Batuhan Kalaycıoğlu, Abdulsamet Doğramacı, Mert Ömer Cacim">
 <style>
-  :root{
-    --bg:#f6fbff;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --accent:#5b21b6;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --panel:#e6eefc;
-    --shadow: 0 6px 18px rgba(11,35,70,0.08);
-    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  }
-  html,body{height:100%;margin:0;background:var(--bg);color:#0b1220}
-  .app{
-    max-width:1150px;
-    margin:18px auto;
-    padding:18px;
-  }
-  header{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-bottom:12px;
-  }
-  .logo{
-    display:flex;
-    gap:12px;
-    align-items:center;
-  }
-  .logo .title{
-    font-size:20px;font-weight:800;color:var(--accent);
-  }
-  .controls{
-    margin-left:auto;
-    display:flex;
-    gap:8px;
-    align-items:center;
-  }
-  .btn{
-    background:var(--accent);
-    color:white;
-    border:none;
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    box-shadow:var(--shadow);
-    font-weight:600;
-  }
-  .btn.secondary{
-    background:transparent;color:var(--accent);border:2px solid var(--accent);
-  }
-  .panel{
-    background:var(--card);
-    padding:12px;border-radius:10px;box-shadow:var(--shadow);
-  }
-
-  .top-area{display:flex;gap:12px;margin-bottom:14px}
-  .left{
-    width:260px; min-height:360px; display:flex; flex-direction:column; gap:10px;
-  }
-  .team-select{display:flex;flex-direction:column;gap:8px}
-  .team-list{display:flex;flex-direction:column;gap:8px}
-  .team-item{
-    padding:8px;border-radius:8px;background:linear-gradient(90deg,#eef2ff,#fff);display:flex;align-items:center;justify-content:space-between;font-weight:700;color:#0b1220;
-  }
-  .team-item.active{outline:3px solid rgba(91,33,182,0.12)}
-  .score{font-weight:800;color:var(--accent);font-size:18px}
-  .add-team{display:flex;gap:6px;align-items:center}
-  input[type="text"]{padding:8px;border-radius:8px;border:1px solid #dbeafe;flex:1}
-
-  .middle{
-    flex:1; min-height:360px; display:flex;flex-direction:column;gap:12px;
-  }
-  .eras{display:flex;gap:10px;justify-content:space-between}
-  .era{
-    flex:1;padding:10px;border-radius:10px;background:var(--panel);min-height:120px;display:flex;flex-direction:column;gap:6px;align-items:center;
-    border:2px dashed transparent; transition:all .15s ease;
-  }
-  .era:hover{transform:translateY(-3px)}
-  .era.dragover{border-color:var(--accent);background:linear-gradient(180deg,#eef2ff,#ffffff)}
-  .era .era-name{font-weight:800;color:#073b4c}
-  .era .era-range{font-size:12px;color:var(--muted)}
-
-  .board{
-    display:flex;gap:10px; margin-top:6px;
-    flex-wrap:wrap;
-    align-items:flex-start;
-  }
-
-  .card{
-    width:200px;padding:10px;border-radius:8px;background:var(--card);box-shadow:var(--shadow);cursor:grab;margin:6px;
-    user-select:none;border-left:6px solid var(--accent);
-  }
-  .card.small{width:150px}
-  .card h4{margin:0 0 6px 0;font-size:14px}
-  .card p{margin:0;font-size:13px;color:var(--muted)}
-
-  .right{
-    width:260px; display:flex;flex-direction:column;gap:12px;
-  }
-
-  .log{height:120px;overflow:auto;padding:8px;background:linear-gradient(180deg,#fff,#fbfbff);border-radius:8px;border:1px dashed #edf2ff}
-  .hint{font-size:13px;color:var(--muted)}
-  footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
-
-  /* small screens */
-  @media (max-width:900px){
-    .top-area{flex-direction:column}
-    .left,.right{width:100%}
-    .eras{flex-direction:row;overflow:auto}
-  }
-</style>
-</head>
-<body>
-    
-    <!doctype html>
-<html lang="tr">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Zamanın Misketleri — Dijital Yerleştirme</title>
-<style>
-/* ... (önceki tüm CSS burada aynı şekilde kalacak) ... */
-
-/* Açılış penceresi (modal) */
-.modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(3px);
+:root{
+  --bg:#f6fbff; --card:#ffffff; --muted:#6b7280; --accent:#5b21b6;
+  --panel:#e6eefc; --shadow:0 6px 18px rgba(11,35,70,0.08);
+  font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
-.modal-content {
-  background: white;
-  max-width: 600px;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  animation: fadeIn .6s ease;
-  text-align: center;
-}
-.modal-content img.logo {
-  width: 110px;
-  margin-bottom: 12px;
-}
-.modal-content h1 {
-  color: #5b21b6;
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-.modal-content p {
-  color: #374151;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-.modal-content .team {
-  margin-top: 14px;
-  background: #f3e8ff;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: 600;
-  color: #4c1d95;
-}
-.modal-content button {
-  margin-top: 20px;
-  background: #5b21b6;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-}
-@keyframes fadeIn {
-  from {opacity:0;transform:scale(0.9)}
-  to {opacity:1;transform:scale(1)}
-}
+html,body{height:100%;margin:0;background:var(--bg);color:#0b1220}
+.app{max-width:1150px;margin:18px auto;padding:18px;}
+header{display:flex;gap:12px;align-items:center;margin-bottom:12px;}
+.logo{display:flex;gap:12px;align-items:center;}
+.logo .title{font-size:20px;font-weight:800;color:var(--accent);}
+.controls{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.btn{background:var(--accent);color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;box-shadow:var(--shadow);font-weight:600;}
+.btn.secondary{background:transparent;color:var(--accent);border:2px solid var(--accent);}
+.panel{background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow);}
+.top-area{display:flex;gap:12px;margin-bottom:14px;}
+.left{width:260px;min-height:360px;display:flex;flex-direction:column;gap:10px;}
+.team-list{display:flex;flex-direction:column;gap:8px;}
+.team-item{padding:8px;border-radius:8px;background:linear-gradient(90deg,#eef2ff,#fff);display:flex;align-items:center;justify-content:space-between;font-weight:700;color:#0b1220;cursor:pointer;}
+.team-item.active{outline:3px solid rgba(91,33,182,0.12)}
+.score{font-weight:800;color:var(--accent);font-size:18px;}
+.add-team{display:flex;gap:6px;align-items:center;margin-top:8px;}
+input[type="text"]{padding:8px;border-radius:8px;border:1px solid #dbeafe;flex:1}
+.middle{flex:1;min-height:360px;display:flex;flex-direction:column;gap:12px;}
+.eras{display:flex;gap:10px;justify-content:space-between;}
+.era{flex:1;padding:10px;border-radius:10px;background:var(--panel);min-height:120px;display:flex;flex-direction:column;gap:6px;align-items:center;border:2px dashed transparent;transition:all .15s ease;overflow:auto}
+.era:hover{transform:translateY(-3px)}
+.era.dragover{border-color:var(--accent);background:linear-gradient(180deg,#eef2ff,#ffffff)}
+.era .era-name{font-weight:800;color:#073b4c}
+.era .era-range{font-size:12px;color:var(--muted)}
+.board{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;align-items:flex-start;min-height:120px}
+.card{width:200px;padding:10px;border-radius:8px;background:var(--card);box-shadow:var(--shadow);cursor:grab;margin:6px;user-select:none;border-left:6px solid var(--accent);}
+.card.selected{outline:3px solid rgba(91,33,182,0.15);transform:translateY(-4px)}
+.card.small{width:150px;padding:6px;border-left:6px solid;}
+.card h4{margin:0 0 6px 0;font-size:14px}
+.card p{margin:0;font-size:13px;color:var(--muted)}
+.right{width:260px;display:flex;flex-direction:column;gap:12px;}
+.log{height:140px;overflow:auto;padding:8px;background:linear-gradient(180deg,#fff,#fbfbff);border-radius:8px;border:1px dashed #edf2ff;font-size:13px}
+.hint{font-size:13px;color:var(--muted)}
+footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.75);display:flex;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(3px)}
+.modal-content{background:white;max-width:640px;padding:28px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.2);animation:fadeIn .5s ease;text-align:center}
+.modal-content img.logo{width:110px;margin-bottom:12px}
+.modal-content h1{color:var(--accent);font-size:22px;margin-bottom:10px}
+.modal-content p{color:#374151;line-height:1.5;margin-bottom:10px}
+.modal-content .team{margin-top:14px;background:#f3e8ff;padding:10px;border-radius:10px;font-weight:600;color:#4c1d95}
+.modal-content button{margin-top:18px;background:var(--accent);color:white;border:none;padding:10px 18px;border-radius:10px;font-size:15px;cursor:pointer}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
+@media(max-width:900px){.top-area{flex-direction:column}.left,.right{width:100%}.eras{flex-direction:row;overflow:auto}}
 </style>
 </head>
 <body>
 
-<!-- 🔹 Açılış Bilgilendirme Penceresi -->
+<!-- Açılış modal -->
 <div class="modal" id="introModal">
   <div class="modal-content">
-      <img class="logo" src="https://upload.wikimedia.org/wikipedia/tr/c/cc/Ataturkuni_logo.png?20200406213338">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/tr/c/cc/Ataturkuni_logo.png?20200406213338" alt="Atatürk Üniversitesi">
     <h1>ZAMANIN MİSKETLERİ ETKİNLİĞİ</h1>
-    <p><strong>Sosyal Bilgiler Öğretiminde Yerel Çocuk Oyunları Dersi</strong> kapsamında hazırladığımız bu etkinlikte, biz öğrenciler geçmişten günümüze uzanan tarihi olayları <em>misketlerle zamana yerleştirerek</em> öğreneceğiz.</p>
-    <p>Amacımız; tarihsel olayların sıralamasını eğlenceli bir şekilde kavramak, geçmişle bugün arasında bağ kurmak ve <strong>kronoloji bilincimizi güçlendirmektir.</strong></p>
-    <p>Oyun içinde her takım, rastgele çektiği olay kartlarını doğru çağa yerleştirmeye çalışacak. Her doğru tahmin, bizi “Zamanın Ustaları” unvanına bir adım daha yaklaştıracak!</p>
+    <p><strong>Sosyal Bilgiler Öğretiminde — Yerel Çocuk Oyunları Dersi</strong> kapsamında hazırladığımız bu etkinlikte, biz öğrenciler geçmişten günümüze uzanan tarihi olayları <em>misketlerle</em> zamana yerleştirerek öğreneceğiz.</p>
+    <p>Amacımız; kronoloji bilincini güçlendirmek, olaylar arasındaki neden-sonuç ilişkisini tartışmak ve takım çalışmasıyla öğrenmeyi keyifli hâle getirmektir.</p>
     <div class="team">
       <div>Hazırlayanlar:</div>
       <div>Muhammet Emin Aydın<br>Ömer Faruk Aras<br>Batuhan Kalaycıoğlu<br>Abdulsamet Doğramacı<br>Mert Ömer Cacim</div>
@@ -204,63 +74,30 @@
   </div>
 </div>
 
-<!-- 🔸 Buradan itibaren önceki oyun kodunun <div class="app"> kısmı başlar -->
-<div class="app">
-  <!-- ... önceki tüm içerik buraya aynı şekilde gelecek ... -->
-</div>
-
-<script>
-/* 🔸 Modal aç/kapat işlemi */
-window.addEventListener('DOMContentLoaded', ()=>{
-  const modal = document.getElementById('introModal');
-  const btn = document.getElementById('startGameBtn');
-  btn.addEventListener('click', ()=>{
-    modal.style.display = 'none';
-  });
-});
-
-/* 🔸 Buradan itibaren önceki JavaScript kodun (oyun mantığı, puanlama vb.) aynen devam edecek */
-</script>
-
-</body>
-</html>
-
-<div class="app">
+<div class="app" id="gameApp" style="display:none;">
   <header>
     <div class="logo">
-      <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><rect x="1" y="1" width="22" height="22" rx="6" fill="#eef2ff"/><circle cx="8.5" cy="9.5" r="2.4" fill="#6b21a8"/><rect x="13" y="6" width="8" height="2.8" rx="1" fill="#6b21a8"/></svg>
-      <div>
-        <div class="title">ZAMANIN MİSKETLERİ</div>
-        <div style="font-size:12px;color:var(--muted)">Dijital Yerleştirme • Öğrenci Dostu</div>
-      </div>
+      <div class="title">ZAMANIN MİSKETLERİ</div>
+      <div style="font-size:12px;color:var(--muted)">Dijital Yerleştirme • 50 Kartlık Versiyon</div>
     </div>
-
     <div class="controls">
+      <button class="btn secondary" id="shuffleBtn">🔄 Kartları Karıştır</button>
       <div id="currentTeamLabel" style="font-weight:700;color:#0b1220;margin-right:8px">Takım: —</div>
       <button class="btn" id="resetBtn">Sıfırla</button>
-      <button class="btn secondary" id="helpBtn">Yardım</button>
+      <button class="btn secondary" id="showResults">Sonuçları Göster</button>
+      <button class="btn secondary" id="exportBtn">Skoru Kopyala</button>
     </div>
   </header>
 
   <div class="top-area">
     <div class="left panel">
       <div style="font-weight:800;margin-bottom:8px">Takımlar</div>
-      <div class="team-select">
-        <div class="team-list" id="teamList"></div>
-
-        <div style="margin-top:6px" class="add-team">
-          <input id="teamInput" type="text" placeholder="Yeni takım adı (örn. Mavi Takım)" />
-          <button class="btn" id="addTeamBtn">Ekle</button>
-        </div>
-        <div style="margin-top:8px;color:var(--muted);font-size:13px">Not: Her takım için puan otomatik tutulur.</div>
+      <div class="team-list" id="teamList"></div>
+      <div class="add-team">
+        <input id="teamInput" type="text" placeholder="Yeni takım adı (örn. Mavi Takım)" />
+        <button class="btn" id="addTeamBtn">Ekle</button>
       </div>
-      <hr style="margin:10px 0;border:none;border-top:1px dashed #f0f6ff" />
-      <div style="font-weight:800;margin-bottom:6px">Durum</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <div style="width:10px;height:10px;background:#ffedd5;border-radius:2px"></div>
-        <div class="hint">Sürükle veya kart seç → ardından yuva seç</div>
-      </div>
-
+      <div style="margin-top:8px;color:var(--muted);font-size:13px">Takım seçmeden yerleştirme yapılamaz.</div>
     </div>
 
     <div class="middle">
@@ -268,303 +105,327 @@ window.addEventListener('DOMContentLoaded', ()=>{
         <div style="font-weight:800">Çağ Yuvaları</div>
         <div style="color:var(--muted);font-size:13px">Doğru yerleştirme: +10 • Yakın: +5 • Yanlış: 0</div>
       </div>
+      <div class="eras" id="eras"></div>
 
-      <div class="eras" id="eras">
-        <!-- eras inserted by JS -->
-      </div>
-
-      <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
         <div style="font-weight:800">Olay Kartları</div>
-        <div style="font-size:13px;color:var(--muted)">Kartlara tıklayıp bir yuva seçebilirsiniz (dokunmatik uyumlu)</div>
+        <div style="font-size:13px;color:var(--muted)">Kartlara dokunup seçin, sonra bir çağ seçin (dokunmatik uyumlu).</div>
       </div>
-
-      <div class="board panel" id="board">
-        <!-- cards -->
-      </div>
+      <div class="board panel" id="board"></div>
     </div>
 
     <div class="right panel">
       <div style="font-weight:800">Puan Tablosu</div>
-      <div id="scoreboard" style="display:flex;flex-direction:column;gap:8px"></div>
-
-      <div style="margin-top:6px;font-weight:700">Oyun Günlüğü</div>
+      <div id="scoreboard"></div>
+      <div style="margin-top:10px;font-weight:700">Oyun Günlüğü</div>
       <div class="log" id="logArea"></div>
-
-      <div style="margin-top:8px">
-        <button class="btn" id="showResults">Sonuçları Göster</button>
-        <button class="btn secondary" id="exportBtn" style="margin-left:6px">Skoru Kopyala</button>
-      </div>
     </div>
   </div>
 
-  <footer class="hint">Öğretmen ipucu: "Tahmin" teması için yuvalarda tarihleri başta göstermeyerek tartışma turu oluşturabilirsiniz.</footer>
+  <footer class="hint">Öğretmen ipucu: "Tahmin" teması için yuvalarda tarihleri başlangıçta gizleyin ve tartışma turu yapın.</footer>
 </div>
 
 <script>
-/*
-  Zamanın Misketleri - Dijital Yerleştirme
-  - Takım oluşturma/ seçme
-  - Kartları sürükle-bırak veya tıklama ile yuvalara yerleştirme
-  - Puanlama: doğru/ yakın / yanlış
-  - Basit log ve sonuç gösterimi
-*/
-
-// --- Demo veri: çağlar ve kartlar ---
-// eras: id, name, rangeStart, rangeEnd (inclusive), displayRange (string)
+// --- VERİLER ---
+// Çağlar
 const ERAS = [
-  {id:'ilk', name:'İlk Çağ', rangeStart:-3200, rangeEnd:375, displayRange:'M.Ö. 3200 – M.S. 375', color:'#fef3c7'},
-  {id:'orta', name:'Orta Çağ', rangeStart:375, rangeEnd:1453, displayRange:'M.S. 375 – 1453', color:'#ede9fe'},
-  {id:'yeni', name:'Yeni Çağ', rangeStart:1453, rangeEnd:1789, displayRange:'1453 – 1789', color:'#dbeafe'},
-  {id:'yakin', name:'Yakın Çağ', rangeStart:1789, rangeEnd:2100, displayRange:'1789 – Günümüz', color:'#dcfce7'}
+  {id:'ilk', name:'İlk Çağ', rangeStart:-3200, rangeEnd:375, displayRange:'M.Ö. 3200 – M.S. 375'},
+  {id:'orta', name:'Orta Çağ', rangeStart:375, rangeEnd:1453, displayRange:'M.S. 375 – 1453'},
+  {id:'yeni', name:'Yeni Çağ', rangeStart:1453, rangeEnd:1789, displayRange:'1453 – 1789'},
+  {id:'yakin', name:'Yakın Çağ', rangeStart:1789, rangeEnd:2100, displayRange:'1789 – Günümüz'}
 ];
 
-// cards: id, title, year (or approximate), short
+// 50 Kart: (senin onayladığın 10 + 40 genişletilmiş)
 const CARDS = [
-  {id:'c1', title:'İstanbul’un Fethi', year:1453, short:'Bizans’ın başkenti İstanbul Osmanlı tarafından fethedildi.'},
-  {id:'c2', title:'Sanayi Devrimi (başlangıç)', year:1769, short:'Buhar makinesiyle başlayan sanayi değişimi.'},
-  {id:'c3', title:'Mağara Resimleri (Lascaux)', year:-15000, short:'İnsanların ilk duvar resimleri.'},
-  {id:'c4', title:'Rönesans Dönemi', year:1500, short:'Sanat ve bilimde yeniden doğuş.'},
-  {id:'c5', title:'Malazgirt Savaşı', year:1071, short:'Türklerin Anadolu’ya girişi.'},
-  {id:'c6', title:'Cumhuriyetin İlanı', year:1923, short:'Türkiye Cumhuriyeti kuruldu.'},
-  {id:'c7', title:'Matbaanın Avrupa’ya Girişi', year:1450, short:'Bilginin yayılmasını hızlandırdı.'},
-  {id:'c8', title:'İlk Yazının İcadı', year:-3200, short:'Yazının bulunmasıyla tarihin başlaması.'},
-  {id:'c9', title:'Amerika’nın Keşfi', year:1492, short:'Yeni kıtaların bulunması.'},
-  {id:'c10', title:'Ay’a İlk İnsan Yolculuğu', year:1969, short:'Apollo 11 ile Ay yürüyüşü.'}
+  {id:'k1', title:'İlk Yazının İcadı', year:-3200, short:'Sümerler yazıyı buldu.'},
+  {id:'k2', title:'Mısır Piramitleri', year:-2560, short:'Giza piramitleri inşa edildi.'},
+  {id:'k3', title:'Hammurabi Kanunları', year:-1750, short:'İlk yazılı hukuk kuralları.'},
+  {id:'k4', title:'Yunan Şehir Devletleri', year:-800, short:'Demokrasi temelleri atıldı.'},
+  {id:'k5', title:'Pers İmparatorluğu', year:-550, short:'Büyük Asya imparatorluğu.'},
+  {id:'k6', title:'Roma Cumhuriyeti', year:-509, short:'Hukuk ve yönetim gelişti.'},
+  {id:'k7', title:'Büyük İskender Dönemi', year:-336, short:'Helenistik kültür yayıldı.'},
+  {id:'k8', title:'Roma İmparatorluğu’nun Kuruluşu', year:-27, short:'Akdeniz birliği şekillendi.'},
+  {id:'k9', title:'Hz. İsa’nın Doğumu', year:0, short:'Milat başlangıcı.'},
+  {id:'k10', title:'Roma İmparatorluğu’nun Yıkılışı', year:476, short:'Orta Çağ başladı.'},
+
+  {id:'k11', title:'Kavimler Göçü', year:375, short:'Avrupa’da yeni krallıklar kuruldu.'},
+  {id:'k12', title:'İslamiyet’in Doğuşu', year:610, short:'Yeni bir inanç ve medeniyet doğdu.'},
+  {id:'k13', title:'Türklerin İslamiyeti Kabulü', year:751, short:'Türk-İslam kültürü şekillendi.'},
+  {id:'k14', title:'Uygur Yazısı Gelişimi', year:800, short:'Erken Türk yazı örnekleri.'},
+  {id:'k15', title:'Karahanlılar Dönemi', year:940, short:'İlk Müslüman Türk devletleri.'},
+  {id:'k16', title:'Büyük Selçuklu Devleti', year:1040, short:'Anadolu’ya ilerleyiş başladı.'},
+  {id:'k17', title:'Malazgirt Savaşı', year:1071, short:'Anadolu’nun kapıları açıldı.'},
+  {id:'k18', title:'Haçlı Seferleri', year:1096, short:'Doğu-Batı ilişkileri değişti.'},
+  {id:'k19', title:'Moğol İstilası', year:1206, short:'Asya’da büyük yıkımlar.'},
+  {id:'k20', title:'İstanbul’un Fethi', year:1453, short:'Orta Çağ sona erdi.'},
+
+  {id:'k21', title:'Matbaanın Avrupa’ya Girişi', year:1450, short:'Bilginin yayılması hızlandı.'},
+  {id:'k22', title:'Coğrafi Keşifler', year:1492, short:'Yeni kıtalar bulundu.'},
+  {id:'k23', title:'Rönesans', year:1500, short:'Sanat ve bilimde yeniden doğuş.'},
+  {id:'k24', title:'Reform Hareketleri', year:1517, short:'Dinde yenilenme dönemi.'},
+  {id:'k25', title:'Kanuni Sultan Süleyman Dönemi', year:1520, short:'Osmanlı zirveye ulaştı.'},
+  {id:'k26', title:'Kapütülasyonların Verilmesi', year:1535, short:'Ticari ayrıcalıklar dönemi.'},
+  {id:'k27', title:'Rasathane Kuruluşu', year:1577, short:'Gözlem ve bilim ilkeleri.'},
+  {id:'k28', title:'Tımar Sistemi', year:1600, short:'Osmanlı toprak düzeni.'},
+  {id:'k29', title:'Sanayi Devrimi', year:1769, short:'Makineleşmeyle üretim değişti.'},
+  {id:'k30', title:'Fransız İhtilali', year:1789, short:'Özgürlük ve eşitlik fikirleri.'},
+
+  {id:'k31', title:'Tanzimat Fermanı', year:1839, short:'Osmanlı’da modernleşme.'},
+  {id:'k32', title:'Telgrafın İcadı', year:1837, short:'İletişimde devrim.'},
+  {id:'k33', title:'Buharlı Lokomotif', year:1804, short:'Ulaşımda dönüşüm.'},
+  {id:'k34', title:'I. Meşrutiyet', year:1876, short:'Anayasal yönetim denemesi.'},
+  {id:'k35', title:'Kırım Savaşı', year:1853, short:'Avrupa jeopolitiğinde değişim.'},
+  {id:'k36', title:'I. Dünya Savaşı', year:1914, short:'Yeni devletler doğdu.'},
+  {id:'k37', title:'Kurtuluş Savaşı', year:1919, short:'Bağımsızlık mücadelesi.'},
+  {id:'k38', title:'Cumhuriyetin İlanı', year:1923, short:'Türkiye Cumhuriyeti kuruldu.'},
+  {id:'k39', title:'Kadınlara Seçme ve Seçilme Hakkı', year:1934, short:'Toplumsal haklar genişledi.'},
+  {id:'k40', title:'II. Dünya Savaşı', year:1939, short:'Dünya yeniden şekillendi.'},
+
+  {id:'k41', title:'Birleşmiş Milletler', year:1945, short:'Küresel barış girişimi.'},
+  {id:'k42', title:'Ay’a İlk İnsan', year:1969, short:'Apollo 11 ay yürüyüşü.'},
+  {id:'k43', title:'İnternetin Ortaya Çıkışı', year:1983, short:'Bilgi çağının başlangıcı.'},
+  {id:'k44', title:'Berlin Duvarı’nın Yıkılışı', year:1989, short:'Soğuk Savaş sona erdi.'},
+  {id:'k45', title:'AB’nin Kuruluşu (Maastricht)', year:1993, short:'Avrupa bütünleşmesi.'},
+  {id:'k46', title:'Cep Telefonlarının Yaygınlaşması', year:1995, short:'Mobil iletişim dönemi.'},
+  {id:'k47', title:'2000’li Dijital Dönem', year:2000, short:'Dijitalleşme hızlandı.'},
+  {id:'k48', title:'COVID-19 Pandemisi', year:2020, short:'Küresel sağlık krizi.'},
+  {id:'k49', title:'Yapay Zekâ Çağı', year:2025, short:'Yeni teknolojik dönüşüm.'},
+  {id:'k50', title:'Güncel Küresel İletişim', year:2010, short:'Sosyal medya ve hızlı haberleşme.'}
 ];
 
-// state
+// --- DURUM ---
 let teams = []; // {id,name,score,color}
 let selectedTeamId = null;
 let placed = {}; // cardId -> eraId
-let logEl, teamListEl, boardEl, erasEl, scoreboardEl;
+let selectedCardId = null;
 
-// utilities
-const uid = (p='id') => p + Math.random().toString(36).slice(2,8);
-const fmt = n => n>=0? n : `${Math.abs(n)} M.Ö.`;
+// renk havuzu
+const COLORS = ['#0ea5e9','#f97316','#10b981','#ef4444','#8b5cf6','#06b6d4','#f43f5e'];
 
-// init DOM
+// DOM ref'leri
+let erasEl, boardEl, teamListEl, scoreboardEl, logEl, currentTeamLabel;
+
 document.addEventListener('DOMContentLoaded', ()=> {
-  logEl = document.getElementById('logArea');
-  teamListEl = document.getElementById('teamList');
-  boardEl = document.getElementById('board');
   erasEl = document.getElementById('eras');
+  boardEl = document.getElementById('board');
+  teamListEl = document.getElementById('teamList');
   scoreboardEl = document.getElementById('scoreboard');
+  logEl = document.getElementById('logArea');
+  currentTeamLabel = document.getElementById('currentTeamLabel');
+
+  // modal start
+  document.getElementById('startGameBtn').addEventListener('click', ()=>{
+    document.getElementById('introModal').style.display = 'none';
+    document.getElementById('gameApp').style.display = 'block';
+  });
 
   // build eras
-  for(const e of ERAS){
+  ERAS.forEach(e=>{
     const d = document.createElement('div');
     d.className = 'era panel';
-    d.id = `era-${e.id}`;
+    d.id = 'era-'+e.id;
     d.dataset.era = e.id;
-    d.style.background = `linear-gradient(180deg, ${e.color}, #fff)`;
-    d.innerHTML = `<div class="era-name">${e.name}</div><div class="era-range">${e.displayRange}</div><div style="flex:1"></div><div style="font-size:12px;color:var(--muted)">Bırakmak için buraya sürükleyin</div>`;
+    d.innerHTML = `<div class="era-name">${e.name}</div><div class="era-range">${e.displayRange}</div>`;
     erasEl.appendChild(d);
-    // drag events
+
+    // drag & drop
     d.addEventListener('dragover', ev=> ev.preventDefault());
     d.addEventListener('dragenter', ()=> d.classList.add('dragover'));
     d.addEventListener('dragleave', ()=> d.classList.remove('dragover'));
-    d.addEventListener('drop', ev=> {
+    d.addEventListener('drop', ev=>{
       ev.preventDefault();
       d.classList.remove('dragover');
       const cardId = ev.dataTransfer.getData('text/plain');
-      if(cardId) tryPlace(cardId, e.id);
+      if(cardId) placeCard(cardId, e.id);
     });
-    // touch/click alternative: click era to place selectedCard
+
+    // click-to-place for touch workflows
     d.addEventListener('click', ()=> {
-      if(window._tapSelectedCard) tryPlace(window._tapSelectedCard, e.id);
+      if(selectedCardId) placeCard(selectedCardId, e.id);
     });
-  }
+  });
 
-  // populate board cards
-  for(const c of CARDS){
-    const el = makeCard(c);
-    boardEl.appendChild(el);
-  }
+  // render initial cards
+  renderCards();
 
-  // team sample
-  addTeam('Mavi Takım','#0ea5e9');
-  addTeam('Turuncu Takım','#f97316');
-  addTeam('Yeşil Takım','#10b981');
-  addTeam('Kırmızı Takım','#ef4444');
+  // sample teams
+  addTeam('Mavi Takım', COLORS[0]);
+  addTeam('Turuncu Takım', COLORS[1]);
+  addTeam('Yeşil Takım', COLORS[2]);
+  addTeam('Kırmızı Takım', '#ef4444');
 
-  // buttons
-  document.getElementById('addTeamBtn').addEventListener('click', ()=> {
+  // handlers
+  document.getElementById('addTeamBtn').addEventListener('click', ()=>{
     const v = document.getElementById('teamInput').value.trim();
     if(!v) return alert('Takım adı girin');
     addTeam(v);
-    document.getElementById('teamInput').value='';
+    document.getElementById('teamInput').value = '';
   });
+  document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
   document.getElementById('resetBtn').addEventListener('click', resetAll);
-  document.getElementById('helpBtn').addEventListener('click', ()=> {
-    alert('Kılavuz:\n• Takım seçin.\n• Kartı sürükleyip bir çağa bırakın veya kart seçip çağ kartına tıklayın.\n• Doğru yerleştirme +10 puan, yakın +5, yanlış 0.');
-  });
   document.getElementById('showResults').addEventListener('click', showResults);
-  document.getElementById('exportBtn').addEventListener('click', ()=> {
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
     navigator.clipboard.writeText(getScoreText()).then(()=> alert('Skor panosu kopyalandı!'));
   });
-
-  // keyboard accessibility: allow card selection by click
-  boardEl.addEventListener('click', (e)=>{
-    const c = e.target.closest('.card');
-    if(!c) return;
-    // toggle selection
-    document.querySelectorAll('.card').forEach(x=>x.classList.remove('selected'));
-    c.classList.add('selected');
-    window._tapSelectedCard = c.dataset.card;
-    log(`Kart seçildi: ${c.dataset.cardTitle} — bir yuva seçin`);
-  });
-
 });
 
-// create card element
-function makeCard(c){
+// --- Kart render ---
+function renderCards(){
+  boardEl.innerHTML = '';
+  CARDS.forEach(c=>{
+    if(placed[c.id]) return; // already placed
+    const el = makeCardElement(c);
+    boardEl.appendChild(el);
+  });
+}
+
+function makeCardElement(c){
   const el = document.createElement('div');
   el.className = 'card';
+  el.id = 'card-'+c.id;
   el.draggable = true;
-  el.id = `card-${c.id}`;
-  el.dataset.card = c.id;
-  el.dataset.cardTitle = c.title;
+  el.dataset.id = c.id;
   el.innerHTML = `<h4>${c.title}</h4><p>${c.short}</p>`;
   // dragstart
   el.addEventListener('dragstart', ev=>{
     ev.dataTransfer.setData('text/plain', c.id);
-    // for visual feedback
-    ev.dataTransfer.effectAllowed = 'move';
+    // visual
+    setSelectedCard(c.id);
   });
-  // click for tap workflows
-  el.addEventListener('click', ()=> {
-    // handled in board click listener (selected)
+  // click (touch)
+  el.addEventListener('click', ()=>{
+    setSelectedCard(c.id);
+    log(`Kart seçildi: ${c.title} — sonra bir yuvaya tıklayın.`);
   });
   return el;
 }
 
-// add team
+function setSelectedCard(cardId){
+  // clear prev selection
+  document.querySelectorAll('.card').forEach(x=> x.classList.remove('selected'));
+  selectedCardId = cardId;
+  const el = document.getElementById('card-'+cardId);
+  if(el) el.classList.add('selected');
+}
+
+// --- Takımlar ---
 function addTeam(name, color){
-  const id = uid('team');
-  const team = {id,name,score:0,color: color || randomColor()};
-  teams.push(team);
+  const id = 't'+Date.now().toString(36).slice(-6);
+  teams.push({id,name,score:0,color: color || COLORS[Math.floor(Math.random()*COLORS.length)]});
   renderTeams();
   selectTeam(id);
 }
 
 function renderTeams(){
   teamListEl.innerHTML = '';
-  for(const t of teams){
+  teams.forEach(t=>{
     const div = document.createElement('div');
     div.className = 'team-item' + (t.id===selectedTeamId ? ' active' : '');
     div.style.borderLeft = `6px solid ${t.color}`;
-    div.innerHTML = `<div>${t.name}</div><div class="score" id="score-${t.id}">${t.score}</div>`;
+    div.innerHTML = `<div>${t.name}</div><div class="score">${t.score}</div>`;
     div.addEventListener('click', ()=> selectTeam(t.id));
     teamListEl.appendChild(div);
-  }
+  });
   renderScoreboard();
 }
 
 function selectTeam(id){
   selectedTeamId = id;
-  document.getElementById('currentTeamLabel').textContent = 'Takım: ' + (teams.find(x=>x.id===id)?.name || '—');
+  const team = teams.find(x=>x.id===id);
+  currentTeamLabel.textContent = 'Takım: ' + (team ? team.name : '—');
   renderTeams();
 }
 
 function renderScoreboard(){
   scoreboardEl.innerHTML = '';
-  for(const t of teams){
+  teams.forEach(t=>{
     const row = document.createElement('div');
     row.style.display='flex';row.style.justifyContent='space-between';row.style.alignItems='center';
-    row.style.padding='6px';row.style.borderRadius='6px';row.style.background='#fff';
+    row.style.padding='6px';row.style.borderRadius='6px';row.style.background='#fff';row.style.marginBottom='6px';
     row.innerHTML = `<div style="font-weight:700">${t.name}</div><div style="font-weight:900;color:${t.color}">${t.score}</div>`;
     scoreboardEl.appendChild(row);
-  }
+  });
 }
 
-// attempt placement
-function tryPlace(cardId, eraId){
+// --- Yerleştirme / Puanlama ---
+function placeCard(cardId, eraId){
   if(!selectedTeamId){ alert('Lütfen önce bir takım seçin.'); return; }
-  // check if already placed
-  if(placed[cardId]){
-    log(`(Uyarı) Bu kart zaten yerleştirildi: ${cardId}`);
-    return;
-  }
+  if(placed[cardId]) { log('(Uyarı) Bu kart zaten yerleştirildi.'); return; }
+
   const card = CARDS.find(c=>c.id===cardId);
   const era = ERAS.find(e=>e.id===eraId);
   if(!card || !era) return;
 
-  // scoring logic
-  // if card.year within era.rangeStart..era.rangeEnd => correct
-  // if within +/- 50 years of boundaries => near (example)
-  let awarded = 0, reason='';
-  if(card.year >= era.rangeStart && card.year <= era.rangeEnd){
-    awarded = 10; reason='Doğru yerleştirme';
+  // scoring: exact in range => +10, within threshold => +5, else 0
+  let awarded = 0, reason = '';
+  if(card.year >= era.rangeStart && card.year <= era.rangeEnd) {
+    awarded = 10; reason = 'Doğru yerleştirme';
   } else {
-    // compute distance to closest boundary in years
+    // distance to nearest boundary (years)
     const dist = Math.min(Math.abs(card.year - era.rangeStart), Math.abs(card.year - era.rangeEnd));
-    // define "near" threshold 60 years (for demo)
-    if(dist <= 60) { awarded = 5; reason='Yakın yerleştirme'; }
-    else { awarded = 0; reason='Yanlış yerleştirme'; }
+    if(dist <= 60) { awarded = 5; reason = 'Yakın yerleştirme'; }
+    else { awarded = 0; reason = 'Yanlış yerleştirme'; }
   }
 
   // record placement
   placed[cardId] = eraId;
   // update team score
   const team = teams.find(t=>t.id===selectedTeamId);
-  if(!team) return;
-  team.score += awarded;
-  renderTeams();
+  if(team) { team.score += awarded; }
 
-  // visually move card into era
-  const cardEl = document.getElementById('card-' + cardId);
-  if(cardEl){
-    // shrink and append
-    cardEl.style.opacity = '0.95';
-    cardEl.style.transform = 'translateY(0)';
-    cardEl.style.cursor = 'default';
-    cardEl.draggable = false;
-    // clone small label into era
+  // visually move card into era as small card
+  const eraEl = document.getElementById('era-'+eraId);
+  if(eraEl){
     const small = document.createElement('div');
     small.className = 'card small';
-    small.style.borderLeft = `6px solid ${team.color}`;
-    small.innerHTML = `<strong style="font-size:13px">${card.title}</strong><div style="font-size:11px;color:var(--muted)">${card.year>0 ? card.year : Math.abs(card.year)+' M.Ö.'}</div>`;
-    document.getElementById('era-' + eraId).appendChild(small);
-    cardEl.remove();
+    small.style.borderLeft = `6px solid ${team ? team.color : '#ccc'}`;
+    small.innerHTML = `<strong style="font-size:13px">${card.title}</strong><div style="font-size:11px;color:var(--muted)">${card.year>0?card.year:(Math.abs(card.year)+' M.Ö.')}</div>`;
+    eraEl.appendChild(small);
   }
 
-  log(`${team.name} takımı: "${card.title}" → ${era.name} (${reason}) [+${awarded}]`);
+  // remove original from board
+  const orig = document.getElementById('card-'+cardId);
+  if(orig) orig.remove();
+
+  renderTeams();
+  log(`${team ? team.name : 'Takım'}: "${card.title}" → ${era.name} (${reason}) [+${awarded}]`);
+  // clear selection
+  selectedCardId = null;
+  document.querySelectorAll('.card').forEach(x=>x.classList.remove('selected'));
 }
 
-// logging
-function log(text){
-  const d = new Date();
-  const t = d.toLocaleTimeString();
-  const line = document.createElement('div');
-  line.textContent = `[${t}] ${text}`;
-  logEl.prepend(line);
+// --- Yardımcılar ---
+function shuffleCards(){
+  // shuffle CARDS order (but keep placed ones already removed visually)
+  for (let i = CARDS.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [CARDS[i], CARDS[j]] = [CARDS[j], CARDS[i]];
+  }
+  renderCards();
+  log('Kartlar karıştırıldı.');
 }
 
-// reset
 function resetAll(){
-  if(!confirm('Tüm yerleştirmeleri sıfırlamak istiyor musunuz?')) return;
-  // reset variables
+  if(!confirm('Tüm yerleştirmeleri ve puanları sıfırlamak istiyor musunuz?')) return;
+  // reset state
   placed = {};
   teams.forEach(t=> t.score = 0);
-  // clear eras content and rebuild base eras
-  document.querySelectorAll('.era').forEach(e=> {
-    const id = e.dataset.era;
-    e.innerHTML = `<div class="era-name">${ERAS.find(x=>x.id===id).name}</div><div class="era-range">${ERAS.find(x=>x.id===id).displayRange}</div><div style="flex:1"></div><div style="font-size:12px;color:var(--muted)">Bırakmak için buraya sürükleyin</div>`;
+  // clear era contents (keep headings)
+  ERAS.forEach(e=>{
+    const eraEl = document.getElementById('era-'+e.id);
+    if(eraEl){
+      eraEl.innerHTML = `<div class="era-name">${e.name}</div><div class="era-range">${e.displayRange}</div>`;
+    }
   });
-  // rebuild board
-  boardEl.innerHTML = '';
-  for(const c of CARDS){
-    const el = makeCard(c);
-    boardEl.appendChild(el);
-  }
+  renderCards();
   renderTeams();
   log('Oyun sıfırlandı.');
 }
 
-// show results
 function showResults(){
-  let s = '--- Skor Tablosu ---\n';
+  if(teams.length===0) return alert('Henüz takım yok.');
   const sorted = [...teams].sort((a,b)=>b.score-a.score);
+  let s = '--- Skor Tablosu ---\n';
   sorted.forEach((t,i)=> s += `${i+1}. ${t.name} — ${t.score} puan\n`);
   alert(s);
 }
@@ -576,11 +437,12 @@ function getScoreText(){
   return text;
 }
 
-function randomColor(){
-  const colors = ['#0ea5e9','#f97316','#10b981','#ef4444','#8b5cf6','#06b6d4','#f43f5e'];
-  return colors[Math.floor(Math.random()*colors.length)];
+function log(text){
+  const line = document.createElement('div');
+  const now = new Date();
+  line.textContent = `[${now.toLocaleTimeString()}] ${text}`;
+  logEl.prepend(line);
 }
-
 </script>
 </body>
 </html>
